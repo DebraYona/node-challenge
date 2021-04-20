@@ -1,23 +1,24 @@
-import {
-  RequestHandler, Request, Response, NextFunction
-} from 'express';
-import Joi from '@hapi/joi';
-import BadRequest from '../errors/bad-request';
-import logger from '../logger';
+import { RequestHandler, Request, Response, NextFunction } from "express";
+import Joi from "@hapi/joi";
+import BadRequest from "../errors/bad-request";
+import logger from "../logger";
 
-const getMessageFromJoiError = (error: Joi.ValidationError): string | undefined => {
+const getMessageFromJoiError = (
+  error: Joi.ValidationError
+): string | undefined => {
   if (!error.details && error.message) {
     return error.message;
   }
   return error.details && error.details.length > 0 && error.details[0].message
-    ? `PATH: [${error.details[0].path}] ;; MESSAGE: ${error.details[0].message}` : undefined;
+    ? `PATH: [${error.details[0].path}] ;; MESSAGE: ${error.details[0].message}`
+    : undefined;
 };
 
 interface HandlerOptions {
   validation?: {
-    body?: Joi.ObjectSchema
-  }
-};
+    body?: Joi.ObjectSchema;
+  };
+}
 
 /**
  * This router wrapper catches any error from async await
@@ -27,8 +28,12 @@ interface HandlerOptions {
  */
 export const requestMiddleware = (
   handler: RequestHandler,
-  options?: HandlerOptions,
-): RequestHandler => async (req: Request, res: Response, next: NextFunction) => {
+  options?: HandlerOptions
+): RequestHandler => async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   if (options?.validation?.body) {
     const { error } = options?.validation?.body.validate(req.body);
     if (error != null) {
@@ -41,15 +46,15 @@ export const requestMiddleware = (
     await handler(req, res, null);
     next();
   } catch (err) {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       logger.log({
-        level: 'error',
-        message: 'Error in request handler',
-        error: err
+        level: "error",
+        message: "Error in request handler",
+        error: err,
       });
     }
     next(err);
-  };
+  }
 };
 
 export default requestMiddleware;

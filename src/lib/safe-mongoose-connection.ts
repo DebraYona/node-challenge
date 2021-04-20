@@ -1,4 +1,4 @@
-import mongoose, { ConnectionOptions } from 'mongoose';
+import mongoose, { ConnectionOptions } from "mongoose";
 
 /** Callback for establishing or re-stablishing mongo connection */
 interface IOnConnectedCallback {
@@ -8,8 +8,13 @@ interface IOnConnectedCallback {
 interface SafeMongooseConnectionOptions {
   mongoUrl: string;
   mongooseConnectionOptions?: ConnectionOptions;
-  retryDelayMs?: number
-  debugCallback?: (collectionName: string, method: string, query: any, doc: string) => void;
+  retryDelayMs?: number;
+  debugCallback?: (
+    collectionName: string,
+    method: string,
+    query: any,
+    doc: string
+  ) => void;
   onStartConnection?: (mongoUrl: string) => void;
   onConnectionError?: (error: Error, mongoUrl: string) => void;
   onConnectionRetry?: (mongoUrl: string) => void;
@@ -18,7 +23,7 @@ interface SafeMongooseConnectionOptions {
 const defaultMongooseConnectionOptions: ConnectionOptions = {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 };
 
 /**
@@ -40,12 +45,12 @@ export default class SafeMongooseConnection {
    * Internal flag to check if connection established for
    * first time or after a disconnection
    */
-  private isConnectedBefore: boolean = false;
+  private isConnectedBefore = false;
 
-  private shouldCloseConnection: boolean = false;
+  private shouldCloseConnection = false;
 
   /** Delay between retrying connecting to Mongo */
-  private retryDelayMs: number = 2000;
+  private retryDelayMs = 2000;
 
   /** Mongo connection options to be passed Mongoose */
   private readonly mongoConnectionOptions: ConnectionOptions = defaultMongooseConnectionOptions;
@@ -59,13 +64,13 @@ export default class SafeMongooseConnection {
    */
   constructor(options: SafeMongooseConnectionOptions) {
     this.options = options;
-    mongoose.connection.on('error', this.onError);
-    mongoose.connection.on('connected', this.onConnected);
-    mongoose.connection.on('disconnected', this.onDisconnected);
-    mongoose.connection.on('reconnected', this.onReconnected);
+    mongoose.connection.on("error", this.onError);
+    mongoose.connection.on("connected", this.onConnected);
+    mongoose.connection.on("disconnected", this.onDisconnected);
+    mongoose.connection.on("reconnected", this.onReconnected);
 
     if (options.debugCallback) {
-      mongoose.set('debug', options.debugCallback);
+      mongoose.set("debug", options.debugCallback);
     }
     if (options.retryDelayMs) {
       this.retryDelayMs = options.retryDelayMs;
@@ -73,7 +78,7 @@ export default class SafeMongooseConnection {
   }
 
   /** Close mongo connection */
-  public close(onClosed: (err: any) => void = () => { }, force: boolean = false) {
+  public close(onClosed: (err: any) => void = () => {}, force = false) {
     if (this.connectionTimeout) {
       clearTimeout(this.connectionTimeout);
     }
@@ -91,8 +96,10 @@ export default class SafeMongooseConnection {
     if (this.options.onStartConnection) {
       this.options.onStartConnection(this.options.mongoUrl);
     }
-    mongoose.connect(this.options.mongoUrl, this.mongoConnectionOptions).catch(() => { });
-  }
+    mongoose
+      .connect(this.options.mongoUrl, this.mongoConnectionOptions)
+      .catch(() => {});
+  };
 
   /**
    * Handler called when mongo connection is established
@@ -110,7 +117,9 @@ export default class SafeMongooseConnection {
   /** Handler called for mongo connection errors */
   private onError = () => {
     if (this.options.onConnectionError) {
-      const error = new Error(`Could not connect to MongoDB at ${this.options.mongoUrl}`);
+      const error = new Error(
+        `Could not connect to MongoDB at ${this.options.mongoUrl}`
+      );
       this.options.onConnectionError(error, this.options.mongoUrl);
     }
   };

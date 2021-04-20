@@ -16,36 +16,36 @@
   ],
   "tags": [
     {
-      "name": "book",
-      "description": "Books APIs"
+      "name": "videogame",
+      "description": "Videogames APIs"
     }
   ],
   "paths": {
-    "/book/add": {
+    "/videogame/add": {
       "post": {
         "tags": [
-          "book"
+          "videogame"
         ],
-        "summary": "Add a book to the database",
-        "operationId": "book-add",
+        "summary": "Add a videogame to the database",
+        "operationId": "videogame-add",
         "requestBody": {
           "description": "New user signing up",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DraftBookSchema"
+                "$ref": "#/components/schemas/DraftVideogameSchema"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Book was added",
+            "description": "Videogame was added",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DraftBookSchema"
+                  "$ref": "#/components/schemas/DraftVideogameSchema"
                 }
               }
             }
@@ -56,13 +56,13 @@
         }
       }
     },
-    "/book/all": {
+    "/videogame/all": {
       "get": {
         "tags": [
-          "book"
+          "videogame"
         ],
-        "summary": "Get all books in database",
-        "operationId": "book-get-all",
+        "summary": "Get all videogames in database",
+        "operationId": "videogame-get-all",
         "responses": {
           "200": {
             "description": "Search results",
@@ -70,10 +70,10 @@
               "application/json": {
                 "schema": {
                   "properties": {
-                    "books": {
+                    "videogames": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/BookSchema"
+                        "$ref": "#/components/schemas/VideogameSchema"
                       }
                     }
                   }
@@ -87,13 +87,13 @@
         }
       }
     },
-    "/book/search": {
+    "/videogame/search": {
       "get": {
         "tags": [
-          "book"
+          "videogame"
         ],
-        "summary": "Search books by name or author",
-        "operationId": "book-search",
+        "summary": "Search videogames by name or author",
+        "operationId": "videogame-search",
         "parameters": [
           {
             "in": "query",
@@ -102,7 +102,7 @@
               "type": "string",
               "default": "hitchhiker"
             },
-            "description": "String containing full name or partial name of the book"
+            "description": "String containing full name or partial name of the videogame"
           },
           {
             "in": "query",
@@ -121,10 +121,10 @@
               "application/json": {
                 "schema": {
                   "properties": {
-                    "books": {
+                    "videogames": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/BookSchema"
+                        "$ref": "#/components/schemas/VideogameSchema"
                       }
                     }
                   }
@@ -141,7 +141,7 @@
   },
   "components": {
     "schemas": {
-      "DraftBookSchema": {
+      "DraftVideogameSchema": {
         "type": "object",
         "properties": {
           "name": {
@@ -154,10 +154,10 @@
           }
         }
       },
-      "BookSchema": {
+      "VideogameSchema": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/DraftBookSchema"
+            "$ref": "#/components/schemas/DraftVideogameSchema"
           }
         ],
         "type": "object",

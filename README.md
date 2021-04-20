@@ -1,9 +1,5 @@
 
-<a href="#">
-  <img src="https://https://github.com/DebraYona/node-challenge/workflows/Publish%20latest%20image/badge.svg" alt="Publish latest image" style="max-width:100%;">
-</a>
 
----
 
 # Express TypeScript Boilerplate
 This repo can be used as a starting point for backend development with Nodejs. It comes bundled with Docker and is CI/CD optimized. The development environment uses `docker-compose` to start dependent services like mongo.

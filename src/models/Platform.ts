@@ -1,13 +1,13 @@
 import { Model, Schema, model } from "mongoose";
 import TimeStampPlugin, {
-  ITimeStampedDocument
+  ITimeStampedDocument,
 } from "./plugins/timestamp-plugin";
 
 export interface IPlatform extends ITimeStampedDocument {
   name: string;
 }
 
-interface IPlatformModel extends Model<IPlatform> {}
+type IPlatformModel = Model<IPlatform>;
 
 const schema = new Schema<IPlatform>({
   name: { type: String, index: true, required: true },
