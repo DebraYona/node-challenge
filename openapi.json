@@ -56,7 +56,7 @@
         }
       }
     },
-    "/videogame/all": {
+    "/videogame/": {
       "get": {
         "tags": [
           "videogame"
@@ -87,7 +87,7 @@
         }
       }
     },
-    "/videogame/search": {
+    "/videogame/:id": {
       "get": {
         "tags": [
           "videogame"
@@ -151,7 +151,46 @@
           "author": {
             "type": "string",
             "example": "Douglas Adams"
-          }
+          },
+          "genre": {
+            "type": "string",
+            "example": "Shutting"
+          },
+          "naSales": {
+            "type": "number",
+            "example": 206520
+          },
+          "erSales": {
+            "type": "number",
+            "example": 205620
+          },
+          "jpSales": {
+            "type": "number",
+            "example": 20200
+          },
+          "otherSales": {
+            "type": "number",
+            "example": 20270
+          },
+          "globalSales": {
+            "type": "number",
+            "example": 205620
+          },
+          "criticScore": {
+            "type": "number",
+            "example": 20520
+          },
+          "developer": {
+            "type": "string",
+            "example": "The Hitchhiker's Guide to the Galaxy"
+          },
+           "rating": {
+            "type": "string",
+            "example": "The Hitchhiker's Guide to the Galaxy"
+          },"yearOfRelase": {
+            "type": "number",
+            "example": 2020
+                    }
         }
       },
       "VideogameSchema": {

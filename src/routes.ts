@@ -1,12 +1,13 @@
+/* eslint-disable sonarjs/no-duplicate-string */
+import { Router } from "express";
+import swaggerUi from "swagger-ui-express";
 import {
   create,
   deleteVideogameById,
   findAll,
   findById,
   uptade,
-} from "controllers/videogame.controller";
-import { Router } from "express";
-import swaggerUi from "swagger-ui-express";
+} from "./controllers/videogame.controller";
 import apiSpec from "../openapi.json";
 
 const swaggerUiOptions = {
@@ -21,6 +22,7 @@ router.get("/videogame/", findAll);
 router.get("/videogame/:id", findById);
 router.put("/videogame/:id", uptade);
 router.delete("/videogame/:id", deleteVideogameById);
+// router.get("/videogame/search", BookController.search);
 
 // Dev routes
 if (process.env.NODE_ENV === "development") {

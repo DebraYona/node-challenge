@@ -17,14 +17,11 @@
   "main": "dist/index.js",
   "scripts": {
     "eslint": "eslint src/server.ts",
-    "postinstall": "chmod +x ./scripts/dev.sh",
     "setup-actions": "chmod +x ./scripts/setup-github-actions.sh; ./scripts/setup-github-actions.sh",
     "build": "tsc",
     "lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
-    "dev": "./scripts/dev.sh",
-    "dev-server": "NODE_ENV=development nodemon",
-    "ts-node-server": "ts-node src/server.ts",
-    "start": "node dist/src/server.js",
+    "dev": "NODE_ENV=development nodemon --inspect",
+    "start": "ts-node -r tsconfig-paths/register src/server.ts",
     "test": "jest",
     "fix-lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts --fix"
   },
@@ -37,6 +34,7 @@
     "express": "4.17.1",
     "mongoose": "5.12.3",
     "swagger-ui-express": "4.1.6",
+    "tsconfig-paths": "^3.9.0",
     "winston": "3.3.3",
     "winston-transport": "4.4.0"
   },
@@ -63,7 +61,7 @@
     "prettier": "^2.2.1",
     "supertest": "6.1.3",
     "ts-jest": "26.5.4",
-    "ts-node": "9.1.1",
+    "ts-node": "^9.1.1",
     "typescript": "4.2.3"
   },
   "license": "MIT",

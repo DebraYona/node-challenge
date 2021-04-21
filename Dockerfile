@@ -1,20 +1,12 @@
-FROM node:12
+FROM node:14
 
-# Add package file
-COPY package*.json ./
+COPY package.json ./
+COPY yarn.lock ./
 
-# Install deps
-RUN npm i
+RUN yarn
 
-# Copy source
-COPY src ./src
+COPY src src
 COPY tsconfig.json ./tsconfig.json
 COPY openapi.json ./openapi.json
 
-# Build dist
-RUN npm run build
-
-# Expose port 3000
-EXPOSE 3000
-
-CMD npm run start
+CMD yarn start
