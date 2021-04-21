@@ -10,7 +10,7 @@ export interface IPlatform extends ITimeStampedDocument {
 type IPlatformModel = Model<IPlatform>;
 
 const schema = new Schema<IPlatform>({
-  name: { type: String, index: true, required: true },
+  name: { type: String },
 });
 
 schema.plugin(TimeStampPlugin);

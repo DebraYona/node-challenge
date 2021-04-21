@@ -34,6 +34,8 @@ export const requestMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
+  console.log(req.body);
+
   if (options?.validation?.body) {
     const { error } = options?.validation?.body.validate(req.body);
     if (error != null) {

@@ -23,8 +23,10 @@ export interface IVideogame extends ITimeStampedDocument {
 export type IVideogameModel = Model<IVideogame>;
 
 const schema = new Schema<IVideogame>({
-  name: { type: String, index: true, required: true },
-  platform: { type: Schema.Types.ObjectId, ref: "Platform" },
+  name: { type: String, required: true },
+  // platform: { type: Schema.Types.ObjectId, ref: "Platform" },
+  platform: { type: String },
+
   yearOfRelase: { type: Number },
   genre: { type: String },
   publisher: { type: String },

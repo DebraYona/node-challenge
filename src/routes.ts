@@ -3,6 +3,7 @@ import { Router } from "express";
 import swaggerUi from "swagger-ui-express";
 import {
   create,
+  createMiddleware,
   deleteVideogameById,
   findAll,
   findById,
@@ -17,7 +18,7 @@ const swaggerUiOptions = {
 const router = Router();
 
 // Book routes
-router.post("/videogame/add", create);
+router.post("/videogame/add", createMiddleware);
 router.get("/videogame/", findAll);
 router.get("/videogame/:id", findById);
 router.put("/videogame/:id", uptade);

@@ -10,6 +10,8 @@ export const findVideogameById = async (id: string) => {
 };
 
 export const createVideogame = async (videogame: IVideogame) => {
+  console.log(videogame);
+
   return videogameRepository.create(videogame);
 };
 

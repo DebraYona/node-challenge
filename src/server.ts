@@ -1,14 +1,11 @@
-import dotenv from "dotenv";
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import result from "config";
 import util from "util";
 import app from "./app";
 import SafeMongooseConnection from "./lib/safe-mongoose-connection";
 import logger from "./logger";
 
-const result = dotenv.config();
-if (result.error) {
-  dotenv.config({ path: ".env.default" });
-}
+result();
 
 const PORT = process.env.PORT || 3000;
 

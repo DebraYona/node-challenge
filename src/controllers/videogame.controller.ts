@@ -1,4 +1,6 @@
+import { videogameDto } from "dtos/videogame.dto";
 import { RequestHandler } from "express";
+import requestMiddleware from "middleware/request-middleware";
 import {
   createVideogame,
   deleteVideogame,
@@ -8,7 +10,8 @@ import {
 } from "services/videogame.service";
 
 export const create: RequestHandler = async (req, res) => {
-  const { videogame } = req.body;
+  const videogame = req.body;
+  console.log(videogame);
 
   const newVideogame = await createVideogame(videogame);
 
@@ -18,10 +21,14 @@ export const create: RequestHandler = async (req, res) => {
   });
 };
 
-export const findById: RequestHandler = async (req, res) => {
-  const { idVideogame } = req.body;
+export const createMiddleware = requestMiddleware(create, {
+  validation: { body: videogameDto },
+});
 
-  const videogame = await findVideogameById(idVideogame);
+export const findById: RequestHandler = async (req, res) => {
+  const { id } = req.params;
+
+  const videogame = await findVideogameById(id);
 
   res.send({
     message: "List",
@@ -39,7 +46,8 @@ export const findAll: RequestHandler = async (req, res) => {
 };
 
 export const uptade: RequestHandler = async (req, res) => {
-  const { videogame, id } = req.body;
+  const videogame = req.body;
+  const { id } = req.params;
 
   const newVideogame = await updateVideogame(videogame, id);
 
@@ -50,7 +58,7 @@ export const uptade: RequestHandler = async (req, res) => {
 };
 
 export const deleteVideogameById: RequestHandler = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   const videogame = await deleteVideogame(id);
 

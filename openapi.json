@@ -87,36 +87,29 @@
         }
       }
     },
-    "/videogame/:id": {
+    "/videogame/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "string",
+            "default": "607fa2862cede8450193722f"
+          },
+          "description": "String containing full id  of the videogame"
+        }
+        
+      ],
       "get": {
         "tags": [
           "videogame"
         ],
-        "summary": "Search videogames by name or author",
+        "summary": "Search videogames by id ",
         "operationId": "videogame-search",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "name",
-            "schema": {
-              "type": "string",
-              "default": "hitchhiker"
-            },
-            "description": "String containing full name or partial name of the videogame"
-          },
-          {
-            "in": "query",
-            "name": "author",
-            "schema": {
-              "type": "string",
-              "default": "douglas"
-            },
-            "description": "String containing full name or partial name of the author"
-          }
-        ],
+        
         "responses": {
           "200": {
-            "description": "Search results",
+            "description": "Get videogame by id ",
             "content": {
               "application/json": {
                 "schema": {
@@ -136,8 +129,71 @@
             "description": "Server error"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "videogame"
+        ],
+        "summary": "Update videogames by id ",
+        "operationId": "videogame-update",
+        "requestBody": {
+          "description": "update videogame signing up",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DraftVideogameSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update videogame by id ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DraftVideogameSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "videogame"
+        ],
+        "summary": "Delete videogames by id ",
+        "operationId": "videogame-delete",
+        
+        "responses": {
+          "200": {
+            "description": "Delete videogame by id ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "videogames": {
+                      "type": "array"
+                      
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
+
     }
+    
   },
   "components": {
     "schemas": {
@@ -146,11 +202,15 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "The Hitchhiker's Guide to the Galaxy"
+            "example": "Counter"
           },
-          "author": {
+          "platform": {
             "type": "string",
-            "example": "Douglas Adams"
+            "example": "Nintendo"
+          },
+          "publisher": {
+            "type": "string",
+            "example": "Nintendo"
           },
           "genre": {
             "type": "string",
@@ -172,6 +232,10 @@
             "type": "number",
             "example": 20270
           },
+          "userScore": {
+            "type": "number",
+            "example": 20270
+          },
           "globalSales": {
             "type": "number",
             "example": 205620
@@ -187,7 +251,8 @@
            "rating": {
             "type": "string",
             "example": "The Hitchhiker's Guide to the Galaxy"
-          },"yearOfRelase": {
+          },
+          "yearOfRelase": {
             "type": "number",
             "example": 2020
                     }
