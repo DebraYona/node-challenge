@@ -1,5 +1,5 @@
-import { IVideogame, Videogame, IVideogameModel } from "models/Videogame";
-import { BaseRepository } from "./base.repository";
+import { IVideogame, Videogame, IVideogameModel } from 'models/Videogame';
+import { BaseRepository } from './base.repository';
 
 export class VideoGameRepository implements BaseRepository<IVideogame> {
   private videogame: IVideogameModel;
@@ -17,7 +17,6 @@ export class VideoGameRepository implements BaseRepository<IVideogame> {
   }
 
   async create(entity: IVideogame): Promise<IVideogame> {
-    console.log(entity);
     const videogame = new Videogame(entity);
     return videogame.save();
   }
