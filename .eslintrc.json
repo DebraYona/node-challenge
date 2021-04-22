@@ -21,6 +21,7 @@
     "jest": true
   },
   "rules": {
+    "jest/expect-expect": "off",
     "import/no-default-export": "off",
     "prettier/prettier": "error",
     "@typescript-eslint/explicit-member-accessibility": "off",

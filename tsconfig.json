@@ -11,5 +11,6 @@
     "baseUrl": "src",
     "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "tests/**/*"],
+  "exclude": ["logs", "node_modules"]
 }
