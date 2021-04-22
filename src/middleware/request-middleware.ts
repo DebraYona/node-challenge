@@ -1,11 +1,9 @@
-import { RequestHandler, Request, Response, NextFunction } from "express";
-import Joi from "@hapi/joi";
-import BadRequest from "../errors/bad-request";
-import logger from "../logger";
+import { RequestHandler, Request, Response, NextFunction } from 'express';
+import Joi from '@hapi/joi';
+import BadRequest from '../errors/bad-request';
+import logger from '../logger';
 
-const getMessageFromJoiError = (
-  error: Joi.ValidationError
-): string | undefined => {
+const getMessageFromJoiError = (error: Joi.ValidationError): string | undefined => {
   if (!error.details && error.message) {
     return error.message;
   }
@@ -26,16 +24,11 @@ interface HandlerOptions {
  * instead of crashing the app
  * @param handler Request handler to check for error
  */
-export const requestMiddleware = (
-  handler: RequestHandler,
-  options?: HandlerOptions
-): RequestHandler => async (
+export const requestMiddleware = (handler: RequestHandler, options?: HandlerOptions): RequestHandler => async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
-  console.log(req.body);
-
   if (options?.validation?.body) {
     const { error } = options?.validation?.body.validate(req.body);
     if (error != null) {
@@ -48,10 +41,10 @@ export const requestMiddleware = (
     await handler(req, res, null);
     next();
   } catch (err) {
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === 'development') {
       logger.log({
-        level: "error",
-        message: "Error in request handler",
+        level: 'error',
+        message: 'Error in request handler',
         error: err,
       });
     }

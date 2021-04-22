@@ -4,7 +4,7 @@
   "description": "Node Challenge",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/DebraYona/node-challenge"
   },
   "keywords": [
     "TypeScript",
@@ -57,6 +57,7 @@
     "eslint-plugin-sonarjs": "^0.6.0",
     "jest": "26.6.3",
     "jest-express": "1.12.0",
+    "mongodb-memory-server": "^6.9.6",
     "nodemon": "2.0.7",
     "prettier": "^2.2.1",
     "supertest": "6.1.3",

@@ -16,7 +16,7 @@ export const create: RequestHandler = async (req, res) => {
 
   res.send({
     message: 'Saved',
-    videogame: newVideogame.toJSON(),
+    videogame: newVideogame,
   });
 };
 
@@ -31,7 +31,7 @@ export const findById: RequestHandler = async (req, res) => {
 
   res.send({
     message: 'List',
-    videogame: videogame.toJSON(),
+    videogame,
   });
 };
 
@@ -52,7 +52,7 @@ export const uptade: RequestHandler = async (req, res) => {
 
   res.send({
     message: 'Update',
-    videogame: newVideogame.toJSON(),
+    videogame: newVideogame,
   });
 };
 

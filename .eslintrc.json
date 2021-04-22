@@ -21,6 +21,7 @@
     "jest": true
   },
   "rules": {
+    "no-underscore-dangle": "off",
     "jest/expect-expect": "off",
     "import/no-default-export": "off",
     "prettier/prettier": "error",
@@ -28,7 +29,10 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": [
       "off",
-      { "allowExpressions": true, "allowTypedFunctionExpressions": true }
+      {
+        "allowExpressions": true,
+        "allowTypedFunctionExpressions": true
+      }
     ],
     "import/prefer-default-export": "off",
     "import/extensions": "off",

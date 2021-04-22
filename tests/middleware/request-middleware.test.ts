@@ -1,6 +1,6 @@
 import { Request } from 'jest-express/lib/request';
 import Joi from '@hapi/joi';
-import requestMiddleware from '../../src/middleware/request-middleware';
+import { requestMiddleware } from '../../src/middleware/request-middleware';
 
 let request: any;
 let next: any;
@@ -11,16 +11,16 @@ describe('Error Handling Middleware', () => {
     next = jest.fn();
     request = new Request('/users?sort=desc', {
       headers: {
-        Accept: 'text/html'
-      }
+        Accept: 'text/html',
+      },
     });
     badRequest = new Request('/users?sort=desc', {
       headers: {
-        Accept: 'text/html'
-      }
+        Accept: 'text/html',
+      },
     });
     badRequest.setBody({
-      stringValue: 14321
+      stringValue: 14321,
     });
   });
 
@@ -31,7 +31,7 @@ describe('Error Handling Middleware', () => {
 
   test('API handles response behaviour when no error thrown', async () => {
     const res: any = {
-      send: jest.fn()
+      send: jest.fn(),
     };
 
     expect(next).toHaveBeenCalledTimes(0);
@@ -64,7 +64,7 @@ describe('Error Handling Middleware', () => {
     };
 
     const bodySchema = Joi.object().keys({
-      stringValue: Joi.string()
+      stringValue: Joi.string(),
     });
 
     const wrappedRoute = requestMiddleware(sampleRoute, { validation: { body: bodySchema } });

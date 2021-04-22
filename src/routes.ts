@@ -1,14 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { Router } from 'express';
 import swaggerUi from 'swagger-ui-express';
-import {
-  create,
-  createMiddleware,
-  deleteVideogameById,
-  findAll,
-  findById,
-  uptade,
-} from './controllers/videogame.controller';
+import { createMiddleware, deleteVideogameById, findAll, findById, uptade } from './controllers/videogame.controller';
 import apiSpec from '../openapi.json';
 
 const swaggerUiOptions = {
@@ -17,7 +10,6 @@ const swaggerUiOptions = {
 
 const router = Router();
 
-// Videogame routes
 router.post('/videogame/add', createMiddleware);
 router.get('/videogame/', findAll);
 router.get('/videogame/:id', findById);

@@ -1,6 +1,7 @@
-import Joi from "@hapi/joi";
+import Joi from '@hapi/joi';
+import { IVideogame } from '../models/Videogame';
 
-export const videogameDto = Joi.object({
+export const videogameDto = Joi.object<IVideogame>({
   name: Joi.string(),
   platform: Joi.string().required(),
   genre: Joi.string().required(),

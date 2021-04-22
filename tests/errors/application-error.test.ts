@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import ApplicationError from '../../src/errors/application-error';
 
 describe('ApplicationError test suite', () => {

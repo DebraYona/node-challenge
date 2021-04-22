@@ -1,5 +1,5 @@
 /* eslint no-param-reassign:0 */
-import { Document, Schema } from "mongoose";
+import { Document, Schema } from 'mongoose';
 
 export interface ITimeStampedDocument extends Document {
   /** Timestamp at creation in milliseconds */
@@ -12,7 +12,7 @@ const TimeStampPlugin = function (schema: Schema) {
   schema.add({ createdAt: { type: Number, index: true } });
   schema.add({ updatedAt: { type: Number, index: true } });
 
-  schema.pre<ITimeStampedDocument>("save", function (next) {
+  schema.pre<ITimeStampedDocument>('save', function(next) {
     if (this.isNew) {
       this.createdAt = new Date().getTime();
     }

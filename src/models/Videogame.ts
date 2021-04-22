@@ -1,9 +1,8 @@
-import { Model, Schema, model } from "mongoose";
-import TimeStampPlugin, {
-  ITimeStampedDocument,
-} from "./plugins/timestamp-plugin";
+import { Model, Schema, model } from 'mongoose';
+import TimeStampPlugin, { ITimeStampedDocument } from './plugins/timestamp-plugin';
 
-export interface IVideogame extends ITimeStampedDocument {
+export interface IVideogame {
+  _id?: string;
   name: string;
   platform: string;
   yearOfRelase: number;
@@ -20,9 +19,11 @@ export interface IVideogame extends ITimeStampedDocument {
   rating: string;
 }
 
-export type IVideogameModel = Model<IVideogame>;
+export type IVideogameDocument = IVideogame & ITimeStampedDocument;
 
-const schema = new Schema<IVideogame>({
+export type IVideogameModel = Model<IVideogameDocument>;
+
+const schema = new Schema<IVideogameDocument>({
   name: { type: String, required: true },
   // platform: { type: Schema.Types.ObjectId, ref: "Platform" },
   platform: { type: String },
@@ -43,7 +44,4 @@ const schema = new Schema<IVideogame>({
 
 schema.plugin(TimeStampPlugin);
 
-export const Videogame: IVideogameModel = model<IVideogame, IVideogameModel>(
-  "Videogame",
-  schema
-);
+export const Videogame: IVideogameModel = model<IVideogameDocument, IVideogameModel>('Videogame', schema);

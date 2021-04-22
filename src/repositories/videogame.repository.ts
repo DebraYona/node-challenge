@@ -18,7 +18,8 @@ export class VideoGameRepository implements BaseRepository<IVideogame> {
 
   async create(entity: IVideogame): Promise<IVideogame> {
     const videogame = new Videogame(entity);
-    return videogame.save();
+    await videogame.save();
+    return videogame.toObject();
   }
 
   async update(entity: IVideogame, id: string): Promise<IVideogame> {

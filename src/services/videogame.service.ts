@@ -1,5 +1,5 @@
-import { IVideogame } from "models/Videogame";
-import { videogameRepository } from "repositories/videogame.repository";
+import { IVideogame } from 'models/Videogame';
+import { videogameRepository } from 'repositories/videogame.repository';
 
 export const findVideogames = async () => {
   return videogameRepository.find();
